@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.csl.qq.card.domain">
+	<class name="Formula" table="formula">
+		<id name="id" column="id" type="integer">
+			<generator class="identity"> </generator>
+		</id>
+		<property name="target" type="string" column="target"> </property>
+		<property name="source1" type="string" column="s1"> </property>
+		<property name="source2" type="string" column="s2"> </property>
+		<property name="source3" type="string" column="s3"> </property>
+		<property name="cost" type="integer" column="cost"></property>
+		<many-to-one name="theme" class="Theme" column="theme_id"></many-to-one>
+	</class>
+</hibernate-mapping>
+    
+    
+    

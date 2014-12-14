@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.csl.qq.card.domain">
+	<class name="Card" table="card">
+		<id name="id" column="id" type="integer">
+			<generator class="native"> </generator>
+		</id>
+		<many-to-one name="theme" column="theme_id" class="Theme" cascade="delete"></many-to-one>
+		<property name="name" type="string" column="name"></property>
+		<property name="price" type="int" column="price"></property>
+		<property name="cardID" type="int" column="cardID"></property>
+	</class>
+</hibernate-mapping>
+    
+    
+    

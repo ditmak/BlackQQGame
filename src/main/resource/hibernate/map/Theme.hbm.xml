@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.csl.qq.card.domain">
+	<class name="Theme" table="theme">
+		<id name="id" column="id" type="integer">
+			<generator class="native"> </generator>
+		</id>
+		<property name="themeID" type="int" column="themeID"></property>
+		<property name="name" type="string" column="name"></property>
+		<property name="level" type="int" column="level"></property>
+		<set name="cards" inverse="true" >
+			<key column="theme_id"></key>
+			<one-to-many class="Card" />
+		</set>
+	</class>
+</hibernate-mapping>
+    
+    
+    

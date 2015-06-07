@@ -8,34 +8,34 @@
 	<packaging>jar</packaging>
 	<name>card</name>
 	<url>http://maven.apache.org</url>
- 	<build>
-  	<plugins>
-  		<plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.1</version>
-        <configuration>
-          <!-- http://maven.apache.org/plugins/maven-compiler-plugin/ -->
-          <source>1.7</source>
-          <target>1.7</target>
-        </configuration>
-      </plugin>
-      <plugin>
-      	<artifactId>maven-source-plugin</artifactId>  
-        <configuration>
-        <attach>true</attach>
-        </configuration>
-        <executions>  
-                        <execution>  
-                            <phase>compile</phase>  
-                            <goals>  
-                                <goal>jar</goal>  
-                            </goals>  
-                        </execution>  
-                    </executions>  
-      </plugin>
-  	</plugins>
-  </build>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<!-- http://maven.apache.org/plugins/maven-compiler-plugin/ -->
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-source-plugin</artifactId>
+				<configuration>
+					<attach>true</attach>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -101,5 +101,11 @@
 			<version>4.9</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.csl</groupId>
+			<artifactId>Util</artifactId>
+			<version>0.0.2-SNAPSHOT</version>
+		</dependency>
+
 	</dependencies>
 </project>

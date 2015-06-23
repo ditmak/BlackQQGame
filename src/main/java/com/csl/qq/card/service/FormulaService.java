@@ -6,6 +6,9 @@ import java.util.List;
 import com.csl.qq.card.domain.Formula;
 
 public interface FormulaService {
-	void saveFormula(Formula formula);
-	List<Formula> getFormulaByThemeId(Serializable themeId);
+    void saveFormula(Formula formula);
+
+    List<Formula> getFormulaByThemeId(int themeId);
+
+    Integer getShortestTime(int themeId);
 }

@@ -15,7 +15,7 @@ import com.csl.util.net.HTTPUtil;
  * 刷新个人主页数据
  */
 public class FlushBoxCardInof extends BaseTask {
-    private String sid;
+    
    private static Pattern pattern = Pattern.compile("\\d (.*?)\\[(\\d+)\\].*?card=(\\d+).*?slot=(\\d+)\">出售</a>",Pattern.DOTALL);
     public FlushBoxCardInof(String sid) {
         this.sid = sid;
@@ -32,7 +32,6 @@ public class FlushBoxCardInof extends BaseTask {
         
             Card card = cardService.findCardByID(id);
             if(card ==null){
-                
                 card.setCardID(Integer.parseInt(id));
                 card.setName(matcher.group());
                 cardService.saveCard(card);

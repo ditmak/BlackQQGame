@@ -44,7 +44,7 @@ public class MainClass {
         // // 设置http访问要使用的代理服务器的端口
         // prop.setProperty("http.proxyPort", "8087");
         // getCurrentInfo();
-        // cala(309);
+        cala(230);
       /*  for (int i = 1; i < 6; i++)
             for (int j = 1;; j++) {
                 int count = getThemesInfo(i, j);
@@ -53,7 +53,7 @@ public class MainClass {
             }*/
        // getCardInfo();
       //  getSuperCardInfo();
-        getSuperCardID();
+        //getSuperCardID();
         // getCurrentInfo();
 
     }

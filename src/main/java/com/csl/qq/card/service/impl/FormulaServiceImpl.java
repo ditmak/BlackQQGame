@@ -8,17 +8,26 @@ import com.csl.qq.card.domain.Formula;
 import com.csl.qq.card.service.FormulaService;
 
 public class FormulaServiceImpl implements FormulaService {
-		private FormulaDAO formulaDAO;
-		public FormulaDAO getFormulaDAO() {
-			return formulaDAO;
-		}
-		public void setFormulaDAO(FormulaDAO formulaDAO) {
-			this.formulaDAO = formulaDAO;
-		}
-		public void saveFormula(Formula formula) {
-				formulaDAO.saveEntry(formula);
-		}
-		public List<Formula> getFormulaByThemeId(Serializable themeId) {
-		return (List<Formula>) formulaDAO.getFormulaByThemeId(themeId);
-		}
+    private FormulaDAO formulaDAO;
+
+    public FormulaDAO getFormulaDAO() {
+        return formulaDAO;
+    }
+
+    public void setFormulaDAO(FormulaDAO formulaDAO) {
+        this.formulaDAO = formulaDAO;
+    }
+
+    public void saveFormula(Formula formula) {
+        formulaDAO.saveEntry(formula);
+    }
+
+    public List<Formula> getFormulaByThemeId(int themeId) {
+        return (List<Formula>) formulaDAO.getFormulaByThemeId(themeId);
+    }
+
+    @Override
+    public Integer getShortestTime(int themeId) {
+        return formulaDAO.getShortestTime(themeId);
+    }
 }

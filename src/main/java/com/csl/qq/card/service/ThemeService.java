@@ -7,4 +7,6 @@ import com.csl.qq.card.domain.Theme;
 public interface ThemeService {
 	void saveTheme(Theme theme);
 	List<Theme>  getALLTheme();
+	Theme findByName(String name);
+	
 }

@@ -20,4 +20,8 @@ public class ThemeServiceImpl implements ThemeService {
 		public List<Theme> getALLTheme(){
 			return (List<Theme>) themeDAO.findAllEntry();
 		}
+        @Override
+        public Theme findByName(String name) {
+           return themeDAO.findEntryByName(name);
+        }
 }

@@ -11,4 +11,6 @@ public class ServiceManager {
         return (T)context.getBean(name);
     }
     public static String CARDSERVICE = "cardService";
+    public static String THEMESERVICE = "themeService";
+    public static String FORMULASERVICE = "formulaService";
 }

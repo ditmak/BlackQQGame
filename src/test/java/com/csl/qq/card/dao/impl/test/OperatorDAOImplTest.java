@@ -7,6 +7,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.csl.qq.card.domain.Operator;
 import com.csl.qq.card.service.OperatorService;
+import com.csl.qq.card.task.SimpleTask;
 
 public class OperatorDAOImplTest {
 	public static ApplicationContext context;
@@ -14,6 +15,13 @@ public class OperatorDAOImplTest {
 	public static void setUp(){
 		context = new ClassPathXmlApplicationContext("spring/application-context.xml");
 	}
+	@Test
+	public void test2() throws InterruptedException{
+	    new Thread(new SimpleTask("AS9AWzaHQVxDUuwj9QRq0beE", 63)).start();
+	    for(;;)
+	        Thread.sleep(10000);
+	}
+	
 	
 	@Test
 	public void test() {

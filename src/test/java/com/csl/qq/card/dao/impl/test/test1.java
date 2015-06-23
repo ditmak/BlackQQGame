@@ -15,7 +15,7 @@ public class test1 {
 
     @Test
     public void testURLContext() {
-        String url = "http://mfkp.qzapp.z.qq.com/qshow/cgi-bin/wl_card_box?sid=AS9AWzaHQVxDUuwj9QRq0beE&g_f=19011";
+        String url = "http://mfkp.qzapp.z.qq.com/qshow/cgi-bin/wl_card_sell?sid=AS9AWzaHQVxDUuwj9QRq0beE&card=2663&slot=9";
         String data = HTTPUtil.getURLContent(url, null, "GET");
         System.out.println(data);
     }

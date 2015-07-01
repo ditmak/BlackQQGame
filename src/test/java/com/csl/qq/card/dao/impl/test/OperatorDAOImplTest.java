@@ -7,6 +7,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.csl.qq.card.domain.Operator;
 import com.csl.qq.card.service.OperatorService;
+import com.csl.qq.card.task.SimpleCardTask;
 import com.csl.qq.card.task.SimpleTask;
 
 public class OperatorDAOImplTest {
@@ -21,6 +22,13 @@ public class OperatorDAOImplTest {
 	    for(;;)
 	        Thread.sleep(10000);
 	}
+        @Test
+        public void test3() throws InterruptedException{
+            new Thread(new SimpleCardTask("AS9AWzaHQVxDUuwj9QRq0beE")).start();
+            for(;;)
+                Thread.sleep(10000);
+        }
+        
 	
 	
 	@Test

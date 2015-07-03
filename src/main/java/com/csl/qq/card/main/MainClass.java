@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,11 +32,12 @@ import com.csl.qq.card.service.CardService;
 import com.csl.qq.card.service.FormulaService;
 import com.csl.qq.card.service.OperatorService;
 import com.csl.qq.card.service.ThemeService;
+import com.csl.qq.card.task.SimpleCardTask;
+import com.csl.util.date.Main;
 import com.csl.util.io.ByteIOUtils;
 
 public class MainClass {
-    private static ApplicationContext context = new ClassPathXmlApplicationContext(
-            "spring/application-context.xml");
+    private static ApplicationContext context = null;
     public static Integer times = 0;
 
     public static void main(String[] args) {
@@ -44,7 +47,7 @@ public class MainClass {
         // // 设置http访问要使用的代理服务器的端口
         // prop.setProperty("http.proxyPort", "8087");
         // getCurrentInfo();
-        cala(230);
+       // cala(230);
       /*  for (int i = 1; i < 6; i++)
             for (int j = 1;; j++) {
                 int count = getThemesInfo(i, j);
@@ -55,7 +58,15 @@ public class MainClass {
       //  getSuperCardInfo();
         //getSuperCardID();
         // getCurrentInfo();
-
+        SimpleCardTask task = new SimpleCardTask("AS9AWzaHQVxDUuwj9QRq0beE","185","橡皮泥的记忆");
+        Executors.newSingleThreadScheduledExecutor().scheduleWithFixedDelay(task, 0, 5, TimeUnit.MINUTES);
+        while(true)
+        try {
+            Main.class.wait();
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     public static void getCurrentInfo() {

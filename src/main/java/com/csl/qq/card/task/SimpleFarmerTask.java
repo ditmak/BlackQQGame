@@ -13,6 +13,8 @@ public class SimpleFarmerTask extends BaseTask {
     public void doSomeThing() {
         System.out.println("任务开始-----");
         List<Element> aTagListByURL = HTTPUtil.getATagListByURL(farmerUrl+sid);
+       
+        //收获 铲除 杀虫 浇水 播种   种植
         for (Element element : aTagListByURL) {
             
         }

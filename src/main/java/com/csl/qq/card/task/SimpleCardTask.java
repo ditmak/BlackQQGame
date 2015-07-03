@@ -32,7 +32,7 @@ public class SimpleCardTask extends BaseTask {
         List<Element> aTagListByURL = HTTPUtil.getATagListByURL(mainUrl+sid);
         for (Element element : aTagListByURL) {
             String text = element.getTextTrim();
-            if(text.equals("放入集卡册")){
+            if(text.contains("放入集卡册")){
                 System.out.println("集卡成功");
                 getCard(element.attributeValue("href"));
                 return;

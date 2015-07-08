@@ -1,23 +1,22 @@
 package com.csl.qq.card.task;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.dom4j.Element;
 
+import com.csl.execute.TaskExecutor;
 import com.csl.util.net.HTTPUtil;
 
 public class SimpleCardTask extends BaseTask {
     private static String mainUrl="http://mfkp.qzapp.z.qq.com/qshow/cgi-bin/wl_card_mainpage?sid=";
     private static String fireCardUrl="http://mfkp.qzapp.z.qq.com/qshow/cgi-bin/wl_card_refine?show=1&pageno=1&fuin=0&steal=0";
-    private static Pattern firecardPattern = Pattern.compile("\\[(\\d+)\\](.*?)已有(\\d+)张.*?(http.*?)\">",Pattern.DOTALL);
+    private static Pattern firecardPattern = Pattern.compile("\\[(\\d+)\\][^0-9]*?(\\d+)?[^0-9]*?已有(\\d+)张.*?(http.*?)\">",Pattern.DOTALL);
     private static String stealCardUrl="http://mfkp.qzapp.z.qq.com/qshow/cgi-bin/wl_card_strategy?&steal=1";
     private static Pattern boxsize = Pattern.compile("保险箱</a>.*?\\((\\d+)/(\\d+)\\)",Pattern.DOTALL);
     private static Pattern cardOperator = Pattern.compile("\\d+\\. (.*?)\\[(\\d+)\\].*?(http.*?)\">.*?(http.*?)\">",Pattern.DOTALL);
-    private Random random = new Random();
     private String themeid;
     private String themeName;
     public SimpleCardTask(String sid,String themeid,String themeName) {
@@ -28,7 +27,7 @@ public class SimpleCardTask extends BaseTask {
 
     @Override
     public void doSomeThing() {
-        System.out.println("任务开始-----");
+        System.out.println("魔卡任务开始-----");
         List<Element> aTagListByURL = HTTPUtil.getATagListByURL(mainUrl+sid);
         for (Element element : aTagListByURL) {
             String text = element.getTextTrim();
@@ -50,7 +49,8 @@ public class SimpleCardTask extends BaseTask {
                return;
             }
         }
-        System.out.println("end----");
+        System.out.println("魔卡end----");
+        TaskExecutor.addTask(this, 5, TimeUnit.MINUTES);
 
     }
     private void getTimeCard(String url){
@@ -98,23 +98,33 @@ public class SimpleCardTask extends BaseTask {
         String content = HTTPUtil.getURLContent(url, null, "GET");   
         Matcher matcher = firecardPattern.matcher(content);
         boolean flag = false;
-        List<String> urls = new ArrayList<String>();
+        Integer minCount = null;
+        String nextUrl ="";
         while(matcher.find()){
             String price = matcher.group(1);
             String num = matcher.group(3);
             String fireCardurl = matcher.group(4).replaceAll("&amp;", "&");
-            if(num.equals("0")&&!matcher.group(2).contains("正在合成中")){
+            if(num.equals("0")&&(matcher.group(2)==null)){
                 HTTPUtil.getURLContent(fireCardurl, null,"GET");
                 flag=true;
                 break;
             }
             if(price.equals("40")){
-                urls.add(fireCardurl);
+               int count = Integer.parseInt(num);
+               if(matcher.group(2)!=null){
+                   count+= Integer.parseInt(matcher.group(2));
+               }
+               if(minCount ==null){
+                   minCount=count;
+               }
+               if(minCount>count){
+                   minCount = count;
+                   nextUrl = fireCardurl;
+               }
             }
         }
         if(!flag){
-          int index =  random.nextInt(urls.size());
-          HTTPUtil.getURLContent(urls.get(index), null , "GET");
+          HTTPUtil.getURLContent(nextUrl, null , "GET");
         }
         doSomeThing();
     }

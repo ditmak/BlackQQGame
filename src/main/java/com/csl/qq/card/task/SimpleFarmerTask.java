@@ -11,6 +11,7 @@ import com.csl.util.net.HTTPUtil;
 
 public class SimpleFarmerTask extends BaseTask {
     private static String farmerUrl = "http://mcapp.z.qq.com/nc/cgi-bin/wap_farm_index?sid=";
+    private static String fisherUrl = "http://mcapp.z.qq.com/nc/cgi-bin/wap_farm_fish_index?sid=";
     private static String prefix_url = "http://mcapp.z.qq.com/nc/cgi-bin";
     private static List<String> keyList = new ArrayList<String>();
     static{
@@ -24,6 +25,7 @@ public class SimpleFarmerTask extends BaseTask {
         keyList.add("签到");
         keyList.add("偷取");
         keyList.add("摘取");
+        keyList.add("养殖");
     }
     public  SimpleFarmerTask(String sid) {
         this.sid=sid;
@@ -32,6 +34,8 @@ public class SimpleFarmerTask extends BaseTask {
     public void doSomeThing() {
         System.out.println("农场任务开始-----");
         List<Element> aTagListByURL = HTTPUtil.getATagListByURL(farmerUrl+sid);
+        doFarmer(aTagListByURL);
+        aTagListByURL = HTTPUtil.getATagListByURL(fisherUrl+sid);
         doFarmer(aTagListByURL);
         System.out.println("农场end--------");
         TaskExecutor.addTask(this, 5, TimeUnit.MINUTES);
@@ -44,7 +48,6 @@ public class SimpleFarmerTask extends BaseTask {
                 String url = element.attributeValue("href");
                 if(url.startsWith("."))
                     url = url.replace(".", prefix_url);
-                
                 List<Element> news= HTTPUtil.getATagListByURL(url);
                 if(vali(eles,news))
                 doFarmer(news);

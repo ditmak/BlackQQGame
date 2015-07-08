@@ -15,12 +15,12 @@ public class MainClass {
         // // 设置http访问要使用的代理服务器的端口
         // prop.setProperty("http.proxyPort", "8087");
         String sid = "AS9AWzaHQVxDUuwj9QRq0beE";
-        SimpleCardTask cardTask = new SimpleCardTask(sid,"185","橡皮泥的记忆");
-        //SimpleFarmerHelperTask farmerHelperTask = new SimpleFarmerHelperTask(sid);
+        //SimpleCardTask cardTask = new SimpleCardTask(sid,"185","橡皮泥的记忆");
+        SimpleFarmerHelperTask farmerHelperTask = new SimpleFarmerHelperTask(sid);
         SimpleFarmerTask farmerTask = new SimpleFarmerTask(sid);
         TaskExecutor.run();
-        TaskExecutor.addTaskNow(cardTask);
-       // TaskExecutor.addTaskNow(farmerHelperTask);
+        //TaskExecutor.addTaskNow(cardTask);
+        TaskExecutor.addTaskNow(farmerHelperTask);
         TaskExecutor.addTaskNow(farmerTask);
         while(true)
         try {

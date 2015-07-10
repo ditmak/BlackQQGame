@@ -35,9 +35,11 @@ public class SimpleFarmerTask extends BaseTask {
         System.out.println("农场任务开始-----");
         List<Element> aTagListByURL = HTTPUtil.getATagListByURL(farmerUrl+sid);
         doFarmer(aTagListByURL);
+        System.out.println("农场end--------");
+        System.out.println("鱼农场开始--------");
         aTagListByURL = HTTPUtil.getATagListByURL(fisherUrl+sid);
         doFarmer(aTagListByURL);
-        System.out.println("农场end--------");
+        System.out.println("鱼农场end--------");
         TaskExecutor.addTask(this, 5, TimeUnit.MINUTES);
     }
     public static void doFarmer(List<Element> eles){

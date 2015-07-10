@@ -116,6 +116,7 @@ public class SimpleCardTask extends BaseTask {
                }
                if(minCount ==null){
                    minCount=count;
+                   nextUrl = fireCardurl;
                }
                if(minCount>count){
                    minCount = count;

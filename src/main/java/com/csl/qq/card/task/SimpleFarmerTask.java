@@ -25,6 +25,7 @@ public class SimpleFarmerTask extends BaseTask {
         keyList.add("签到");
         keyList.add("偷取");
         keyList.add("摘取");
+        keyList.add("捞鱼");
         keyList.add("养殖");
     }
     public  SimpleFarmerTask(String sid) {

@@ -11,6 +11,7 @@ import com.csl.util.net.HTTPUtil;
 public class SimpleFarmerHelperTask extends BaseTask{
     private static String helpUrl = "http://mcapp.z.qq.com/nc/cgi-bin/wap_farm_status_list?sid=";
     private static String prefix_url = "http://mcapp.z.qq.com/nc/cgi-bin";
+    private static int count =0;
     @Override
     public void doSomeThing() {
         System.out.println("偷任务开始-----");
@@ -21,9 +22,14 @@ public class SimpleFarmerHelperTask extends BaseTask{
                 url = url.replace(".", prefix_url);
                 System.out.println(element.getTextTrim()+"---");
                 SimpleFarmerTask.doFarmer(HTTPUtil.getATagListByURL(url));
+                if(++count>10){
+                    count = 0;
+                    break ;
+                }
                 System.out.println("----"+element.getTextTrim()+"---");
                 doSomeThing();
-                return ;
+                count = 0;
+                break ;
             }
         }
         System.out.println("偷end-------");

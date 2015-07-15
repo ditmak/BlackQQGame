@@ -7,7 +7,9 @@ public abstract class BaseTask implements Runnable {
         try {
             doSomeThing();
         } catch (Exception e) {
+            //TODO:发邮件,说明是什么程序挂了
            e.printStackTrace();
+           System.out.println("这是什么鬼");
         }
     }
 

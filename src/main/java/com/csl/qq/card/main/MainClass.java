@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 import com.csl.execute.TaskExecutor;
 import com.csl.qq.card.task.SimpleCardTask;
@@ -29,15 +30,16 @@ public class MainClass {
         String user[] = users.split(",");
         for (String u : user) {
             System.out.println("mainuser----" +u);
-            TaskExecutor.addTaskNow(new SimpleFarmerTask(u));
-            TaskExecutor.addTaskNow(new SimpleFarmerHelperTask(u));
+            TaskExecutor.addScheduledTask(new SimpleFarmerTask(u),5,TimeUnit.MINUTES);
+            TaskExecutor.addScheduledTask(new SimpleFarmerHelperTask(u),25,TimeUnit.MINUTES);
+            TaskExecutor.addScheduledTask(new SimpleCardTask(u, "401", "澳洲之旅","541563154",false),5,TimeUnit.MINUTES);
         }
         String secUserString = pro.getProperty("secUSer");
         String secUsers[] = secUserString.split(",");
         for (String sUser : secUsers) {
             System.out.println("secuser----"+sUser);
-            TaskExecutor.addTaskNow(new SimpleFarmerTask(sUser));
-            TaskExecutor.addTaskNow(new SimpleCardTask(sUser,"185","橡皮泥的记忆"));
+            TaskExecutor.addScheduledTask(new SimpleFarmerTask(sUser),5,TimeUnit.MINUTES);
+            TaskExecutor.addScheduledTask(new SimpleCardTask(sUser, "401", "澳洲之旅","1093695691",true),5,TimeUnit.MINUTES);
         }
         while(true)
         try {

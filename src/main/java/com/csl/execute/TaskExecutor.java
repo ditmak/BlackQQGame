@@ -4,14 +4,14 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import com.csl.qq.card.task.BaseTask;
+
 public class TaskExecutor {
     private static ScheduledThreadPoolExecutor  executor = new ScheduledThreadPoolExecutor(8){
         protected void beforeExecute(Thread t, Runnable r) {
             System.out.println("目前有任务---" +getTaskSize());
-            System.out.println("现在执行任务---");
         };
         protected void afterExecute(Runnable r, Throwable t) {
-            System.out.println("任务结束---");
             System.out.println("目前有任务---" +getTaskSize());
         };
     };

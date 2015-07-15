@@ -11,12 +11,7 @@ import com.csl.util.net.HTTPUtil;
 
 public class OperatorDAOImplTest {
 
-        @Test
-        public void test3() throws InterruptedException{
-            new Thread(new SimpleCardTask("AS9AWzaHQVxDUuwj9QRq0beE","185","橡皮泥的记忆")).start();
-            for(;;)
-                Thread.sleep(10000);
-        }
+      
         @Test
         public void test5() throws InterruptedException{
             new Thread(new SimpleFarmerHelperTask("ARjN47Y5E7xqiOwwcegmSaC4")).start();

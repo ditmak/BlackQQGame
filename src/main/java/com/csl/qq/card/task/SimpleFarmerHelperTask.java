@@ -14,7 +14,6 @@ public class SimpleFarmerHelperTask extends BaseTask{
     private static int count =0;
     @Override
     public void doSomeThing() {
-        System.out.println("偷任务开始-----");
         List<Element> aTagListByURL = HTTPUtil.getATagListByURL(helpUrl+sid);
         for (Element element : aTagListByURL) {
             String url  = element.attributeValue("href");
@@ -32,12 +31,9 @@ public class SimpleFarmerHelperTask extends BaseTask{
                 break ;
             }
         }
-        System.out.println("偷end-------");
-        TaskExecutor.addTask(this, 25, TimeUnit.MINUTES);
-        
     }
     public SimpleFarmerHelperTask(String sid){
         this.sid =sid;
+        taskName="农场好友任务";
     }
-
 }

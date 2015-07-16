@@ -17,14 +17,16 @@ public class SimplePastureTasker extends BaseTask{
         keyList.add("收获");
         keyList.add("清扫");
     }
+    public SimplePastureTasker(String sid) {
+        this.sid= sid;
+    }
     @Override
     public void doSomeThing() {
-        System.out.println("牧场开始");
         List<Element> aTagListByURL = HTTPUtil.getATagListByURL(pastureURL+sid);
         doMainPage(aTagListByURL);
-        System.out.println("牧场结束");
     }
     private void doMainPage(List<Element> eles){
+        boolean flag = false;
         for (Element aTag : eles) {
             String text = aTag.getTextTrim();
             String href = aTag.attributeValue("href");
@@ -34,7 +36,7 @@ public class SimplePastureTasker extends BaseTask{
                     continue;
                 //生产的话，20秒之后添加一个任务
                 if(text.equals("生产")){
-                    TaskExecutor.addTask(this, 19, TimeUnit.SECONDS);
+                   flag = true;
                 }
                 //收获 ..饲养 如果满了会有饲养吗？
                 if(href.startsWith("."))
@@ -42,6 +44,9 @@ public class SimplePastureTasker extends BaseTask{
                 HTTPUtil.getURLContent(href);
                             }
         }
+       if(flag){
+           TaskExecutor.addTask(this,20, TimeUnit.SECONDS);
+       }
         
     }
 }

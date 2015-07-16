@@ -84,7 +84,7 @@ public class SimpleCardTask extends BaseTask {
         }
         matcher = cardOperator.matcher(content);
         while (matcher.find()) {
-            if (matcher.group(1).startsWith(themeName)
+            if (!sale||matcher.group(1).startsWith(themeName)
                     || !matcher.group(2).equals("10")) {
                 if (empty-- > 0) {
                     System.out.println("移动卡到保险箱--->" + matcher.group(1));
@@ -92,11 +92,9 @@ public class SimpleCardTask extends BaseTask {
                             .replaceAll("&amp;", "&"));
                 }
             } else {
-                if (sale) {
                     System.out.println("卖掉卡--->" + matcher.group(1));
                     content = HTTPUtil.getURLContent(matcher.group(3)
                             .replaceAll("&amp;", "&"));
-                }
             }
         }
     }

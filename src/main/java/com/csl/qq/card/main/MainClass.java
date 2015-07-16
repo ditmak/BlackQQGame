@@ -11,6 +11,7 @@ import com.csl.execute.TaskExecutor;
 import com.csl.qq.card.task.SimpleCardTask;
 import com.csl.qq.card.task.SimpleFarmerHelperTask;
 import com.csl.qq.card.task.SimpleFarmerTask;
+import com.csl.qq.card.task.SimplePastureTasker;
 import com.csl.util.date.Main;
 
 public class MainClass {
@@ -33,6 +34,7 @@ public class MainClass {
             TaskExecutor.addScheduledTask(new SimpleFarmerTask(u),5,TimeUnit.MINUTES);
             TaskExecutor.addScheduledTask(new SimpleFarmerHelperTask(u),25,TimeUnit.MINUTES);
             TaskExecutor.addScheduledTask(new SimpleCardTask(u, "401", "澳洲之旅","541563154",false),5,TimeUnit.MINUTES);
+            TaskExecutor.addScheduledTask(new SimplePastureTasker(u), 5, TimeUnit.MINUTES);
         }
         String secUserString = pro.getProperty("secUSer");
         String secUsers[] = secUserString.split(",");
@@ -40,6 +42,7 @@ public class MainClass {
             System.out.println("secuser----"+sUser);
             TaskExecutor.addScheduledTask(new SimpleFarmerTask(sUser),5,TimeUnit.MINUTES);
             TaskExecutor.addScheduledTask(new SimpleCardTask(sUser, "401", "澳洲之旅","1093695691",true),5,TimeUnit.MINUTES);
+            TaskExecutor.addScheduledTask(new SimplePastureTasker(sUser), 5, TimeUnit.MINUTES);
         }
         while(true)
         try {

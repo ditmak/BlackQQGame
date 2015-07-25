@@ -10,7 +10,7 @@ import com.csl.execute.TaskExecutor;
 import com.csl.util.net.HTTPUtil;
 
 public class SimplePastureTasker extends BaseTask{
-    private static String pastureURL = "http://mcapp.z.qq.com/nc/cgi-bin/wap_pasture_index?sid=";
+    private static String pastureURL = "http://mcapp.z.qq.com/mc/cgi-bin/wap_pasture_index?sid=";
     private static List<String> keyList = new ArrayList<String>();
     static{
         keyList.add("生产");
@@ -40,7 +40,7 @@ public class SimplePastureTasker extends BaseTask{
                 }
                 //收获 ..饲养 如果满了会有饲养吗？
                 if(href.startsWith("."))
-                    href =href.replace(".","http://mcapp.z.qq.com/nc/cgi-bin" );
+                    href =href.replace(".","http://mcapp.z.qq.com/mc/cgi-bin" );
                 HTTPUtil.getURLContent(href);
                             }
         }

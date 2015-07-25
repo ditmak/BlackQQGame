@@ -33,7 +33,7 @@ public class MainClass {
             System.out.println("mainuser----" +u);
             TaskExecutor.addScheduledTask(new SimpleFarmerTask(u),5,TimeUnit.MINUTES);
             TaskExecutor.addScheduledTask(new SimpleFarmerHelperTask(u),25,TimeUnit.MINUTES);
-            TaskExecutor.addScheduledTask(new SimpleCardTask(u, "401", "澳洲之旅","541563154",false),5,TimeUnit.MINUTES);
+            TaskExecutor.addScheduledTask(new SimpleCardTask(u, "393", "和风物语","541563154",false),5,TimeUnit.MINUTES);
             TaskExecutor.addScheduledTask(new SimplePastureTasker(u), 5, TimeUnit.MINUTES);
         }
         String secUserString = pro.getProperty("secUSer");
@@ -41,7 +41,7 @@ public class MainClass {
         for (String sUser : secUsers) {
             System.out.println("secuser----"+sUser);
             TaskExecutor.addScheduledTask(new SimpleFarmerTask(sUser),5,TimeUnit.MINUTES);
-            TaskExecutor.addScheduledTask(new SimpleCardTask(sUser, "401", "澳洲之旅","1093695691",true),5,TimeUnit.MINUTES);
+           // TaskExecutor.addScheduledTask(new SimpleCardTask(sUser, "401", "澳洲之旅","1093695691",true),5,TimeUnit.MINUTES);
             TaskExecutor.addScheduledTask(new SimplePastureTasker(sUser), 5, TimeUnit.MINUTES);
         }
         while(true)

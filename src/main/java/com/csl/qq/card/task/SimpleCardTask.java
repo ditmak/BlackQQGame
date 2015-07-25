@@ -1,13 +1,11 @@
 package com.csl.qq.card.task;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.dom4j.Element;
 
-import com.csl.execute.TaskExecutor;
 import com.csl.util.net.HTTPUtil;
 
 public class SimpleCardTask extends BaseTask {

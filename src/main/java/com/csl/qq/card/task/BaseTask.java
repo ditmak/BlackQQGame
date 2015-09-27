@@ -1,8 +1,11 @@
 package com.csl.qq.card.task;
 
+import com.csl.util.net.HTTPUtil;
+
 public abstract class BaseTask implements Runnable {
     protected String sid;
     protected String taskName="";
+    protected String prefix_uri;
     @Override
     public void run() {
         try {
@@ -20,4 +23,10 @@ public abstract class BaseTask implements Runnable {
     public  String toString(){
         return sid+"-------"+taskName;
     };
+    protected String getContent(String uri){
+        uri = uri.replaceAll("&amp;", "&");
+        if(uri.startsWith("."))
+            uri = uri.replace(".", prefix_uri);
+        return HTTPUtil.getURLContent(uri);
+    }
 }

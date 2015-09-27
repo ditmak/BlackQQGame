@@ -1,16 +1,51 @@
 package com.csl.qq.card.dao.impl.test;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.junit.Test;
 
-import com.csl.qq.card.task.SimpleCardTask;
 import com.csl.qq.card.task.SimpleFarmerHelperTask;
 import com.csl.util.net.HTTPUtil;
 
 public class OperatorDAOImplTest {
 
+        @Test
+        public void test7(){
+            Map<String,String> map = new HashMap<>();
+            map.put("大红花", "xxxxxx");
+            System.out.println(map.get("大红花"));
+            System.out.println(map.containsKey("大红花"));
+        }
+    
+    
+    
+        @Test
+        public void test6() {
+            String url = "http://mcapp.z.qq.com/nc/cgi-bin/wap_farm_seed_plant_list?sid=ARjN47Y5E7xqiOwwcegmSaC4&page=1&g_ut=1&v=0&landid=-1";
+            testGetSeeds(url);
+        }
+        private void testGetSeeds(String url){
+            String content = HTTPUtil.getURLContent(url);
+            Pattern pattern = Pattern.compile("）(.*?)x.*?href=\"(.*?)\"",Pattern.DOTALL);
+            Matcher matcher = pattern.matcher(content);
+            while (matcher.find()){
+                System.out.println(matcher.group(1).trim());
+                System.out.println(matcher.group(2));
+            }
+            int index = content.indexOf("下页");
+            if(index!=-1){
+                int secondI = content.lastIndexOf("\"", index);
+                int fisrtI = content.lastIndexOf("\"",secondI-1);
+                url =content.substring(fisrtI+1, secondI);
+                url = url.replaceAll("&amp;", "&");
+                if(url.startsWith("."))
+                    url = url.replace(".", "http://mcapp.z.qq.com/nc/cgi-bin");
+                testGetSeeds(url);
+            }
+        }
       
         @Test
         public void test5() throws InterruptedException{

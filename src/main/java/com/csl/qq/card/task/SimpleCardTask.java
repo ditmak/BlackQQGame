@@ -14,7 +14,7 @@ public class SimpleCardTask extends BaseTask {
     private static Pattern firecardPattern = Pattern.compile(
             "\\[(\\d+)\\][^0-9]*?(\\d+)?[^0-9]*?已有(\\d+)张.*?(http.*?)\">",
             Pattern.DOTALL);
-    private static String stealCardUrl = "http://mfkp.qzapp.z.qq.com/qshow/cgi-bin/wl_card_strategy?&steal=1";
+    private static String stealCardUrl = "http://mfkp.qzapp.z.qq.com/qshow/cgi-bin/wl_card_refine?show=1&pageno=1&steal=1";
     private static Pattern boxsize = Pattern.compile(
             "保险箱</a>.*?\\((\\d+)/(\\d+)\\)", Pattern.DOTALL);
     private static Pattern cardOperator = Pattern.compile(
@@ -24,15 +24,17 @@ public class SimpleCardTask extends BaseTask {
     private String themeName;
     private String stealNo;
     private boolean sale;
+    private int cards=1;
 
     public SimpleCardTask(String sid, String themeid, String themeName,
-            String stealNo, boolean sale) {
+            String stealNo, boolean sale,int cards) {
         this.sid = sid;
         this.themeid = themeid;
         this.themeName = themeName;
         this.stealNo = stealNo;
         this.sale = sale;
         taskName="魔卡任务";
+        this.cards=cards;
     }
 
     @Override
@@ -54,7 +56,7 @@ public class SimpleCardTask extends BaseTask {
                 getCard(element.attributeValue("href"));
                 return;
             } else if (text.equals("偷炉")) {
-                fireCard(stealCardUrl + "&sid=" + sid + "&fuin=" + stealNo);
+                fireCard(stealCardUrl + "&sid=" + sid + "&fuin=" + stealNo+ "&tid=" + themeid);
                 return;
             }
         }
@@ -133,8 +135,11 @@ public class SimpleCardTask extends BaseTask {
                 }
             }
         }
-        if (!flag) {
-            HTTPUtil.getURLContent(nextUrl, null, "GET");
+        if (!flag&&minCount!=null) {
+            if(minCount<cards)
+                HTTPUtil.getURLContent(nextUrl, null, "GET");
+            else
+                return;
         }
         doSomeThing();
     }
